@@ -1,0 +1,94 @@
+@import "../utilities/variables";
+
+/* Animaciones de la imagen del header en la home */
+@keyframes barras {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes tarta {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.5);
+  }
+}
+@keyframes manos {
+  from {
+    transform: skewY(10deg);
+  }
+  to {
+    transform: skewY(0deg);
+  }
+}
+@keyframes cabeza {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(8deg);
+  }
+}
+
+/* #Value {
+  animation: card 1s linear infinite alternate;
+  transform-origin: bottom;
+  transform-box: fill-box;
+} */
+/* Barras */
+#Value_5 {
+  animation: barras 6s linear infinite alternate;
+  transform-origin: bottom;
+  transform-box: fill-box;
+}
+#Value_4 {
+  animation: barras 4s linear infinite alternate;
+  transform-origin: bottom;
+  transform-box: fill-box;
+}
+#Value_3 {
+  animation: barras 3.5s linear infinite alternate;
+  transform-origin: bottom;
+  transform-box: fill-box;
+}
+#Value_2 {
+  animation: barras 5.5s linear infinite alternate;
+  transform-origin: bottom;
+  transform-box: fill-box;
+}
+
+/*tartas */
+#Value_8 {
+  animation: tarta 6s linear 4s infinite alternate;
+  transform-origin: bottom;
+  transform-box: fill-box;
+}
+
+#Value_10 {
+  animation: tarta 4s linear infinite alternate;
+  transform-origin: bottom;
+  transform-box: fill-box;
+}
+/* Manos */
+#SKIN_7 {
+  animation: manos 2.5s linear infinite alternate;
+  transform-origin: center;
+}
+/* Cabeza */
+#Hair_2,
+#SKIN_8 {
+  animation: cabeza 2s ease-in-out infinite alternate;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+/*Efecto transform al pasar el ratón en las tarjetas y los testimonios para home*/
+:is(.cards__img, .testimony__item):hover {
+  transform: translateY(-15px);
+  filter: $filter-shadow-hover;
+}
+

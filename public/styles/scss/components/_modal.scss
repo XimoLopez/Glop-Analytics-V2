@@ -1,0 +1,72 @@
+@import "../utilities/variables";
+
+.modal__fader {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 99998;
+  background-color: $bg-glassmorphism;
+  backdrop-filter: blur(18px);
+  &.active {
+    display: block;
+  }
+}
+
+.modal__window {
+  display: none;
+  width: 95%;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99999;
+  background-color:$bg-modal-access;
+  backdrop-filter: blur(20px);
+  border: $bg-glassmorphism solid 1px ;
+  border-radius: 5px;
+  box-shadow: $box-shadow-modal;
+  padding: 2rem;
+  &.active {
+    display: block;
+  }
+}
+
+.modal__btn-close {
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid $verde-gradient;
+    border-radius: 100rem;
+    color: inherit;
+    font-size: 2rem;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .2s;
+    &:hover, &:focus {
+        background: $color-intro;
+        transform: translateY(-0.2rem);
+    }
+    &::before {
+        content: '×';
+        transform: translateY(-0.1rem);
+        color: $verde-gradient;
+    }
+}
+
+
+/* 
+    Breakpoint 
+    */
+
+@media (min-width: 768px) {
+  .modal__window {
+    width: 500px;
+  }
+}

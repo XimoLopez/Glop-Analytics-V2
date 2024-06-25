@@ -1,0 +1,24 @@
+/* 
+    Bases
+    */
+@import "base/reset", "base/tipografia";
+/* 
+    Utilities
+    */
+@import "utilities/variables", "utilities/container", "utilities/mixins";
+/* 
+    Layouts
+    */
+@import "layout/menu", "layout/header", "layout/footer", "layout/forms";
+
+/* 
+    Components
+    */
+@import "components/botones", "components/cards", "components/about",
+  "components/testimony", "components/join", "components/menuBurger" , "components/modal", "components/scrollToTop";
+
+
+/* 
+    Pages
+    */
+@import "pages/home", "pages/servicios";

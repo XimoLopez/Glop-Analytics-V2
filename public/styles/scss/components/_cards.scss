@@ -1,0 +1,40 @@
+@import "../utilities/variables";
+
+/*
+    Trajetas de información de servicios
+    */
+.cards {
+  text-align: center;
+  display: grid;
+  gap: 5em;
+  color: $color-main-fuente;
+  &__img {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 1.5em;
+    filter: $filter-shadow;
+    transition: all 0.25s;
+  }
+  &__title {
+    font-family: $heading-font;
+    margin-bottom: 1em;
+  }
+  &__paragraph {
+    line-height: 1.5;
+  }
+}
+
+/* 
+    Brakepoint
+     */
+
+@media (min-width: 768px) {
+  .cards {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 3em 4em;
+  }
+}

@@ -1,0 +1,113 @@
+@import "../utilities/variables";
+/* 
+    Footer
+     */
+
+.footer {
+  color: $color-bgdark-fuente;
+  background-color: $color-footer;
+  &__picture {
+    width: 200px;
+    margin-bottom: 2.5em;
+  }
+  &__img {
+    width: 100%;
+    display: block;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__contact {
+    padding-bottom: 20px;
+  }
+  &__direction {
+    color: $color-bgdark-fuente;
+    text-decoration: none;
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    &--second {
+      margin: 1em 0;
+    }
+  }
+  &__nav {
+    display: grid;
+    gap: 0.7em;
+    margin-top: 2em;
+    text-align: center;
+  }
+  &__link {
+    color: $color-bgdark-fuente;
+    text-decoration: none;
+    font-family: $heading-font;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  &__social {
+    margin-top: 4em;
+    width: max-content;
+    display: grid;
+    grid-auto-rows: max-content;
+    grid-auto-flow: column;
+    gap: 1em;
+  }
+  &__smedia {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    border: 1px solid $color-bgdark-fuente;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  &__media {
+    display: block;
+  }
+  &__container{
+    padding-bottom: 4rem;
+  }
+}
+
+/* 
+    Breakpoint
+     */
+@media (min-width: 768px) {
+  .footer {
+    &__content {
+      display: grid;
+      grid-auto-flow: column;
+      gap: 2em;
+    }
+    &__contact {
+      max-width: 200px;
+    }
+    &__nav {
+      margin-top: 0;
+    }
+    &__social {
+      margin: 0;
+    }
+    &__direction {
+      &--first {
+        max-width: 300px;
+      }
+      &--second {
+        margin: 0 0 1em;
+      }
+    }
+  }
+}
+
+/* 
+  Footer form
+   */
+
+.footer-form {
+  /* Asterisco campos obligatorios */
+  &__asterisco {
+    color: $verde-gradient;
+  }
+}

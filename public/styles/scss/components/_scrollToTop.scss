@@ -1,0 +1,55 @@
+@import "../utilities/variables";
+
+.scroll__gotop {
+  width: 3rem;
+  height: 3rem;
+  position: fixed;
+  z-index: 999;
+  top: 100%;
+  transform: translateY(-50%);
+  right: 0.7rem;
+  bottom: 0.7rem;
+  margin: auto;
+  padding: 0.7rem;
+  border-radius: 50%;
+  color: $verde-gradient;
+  background-color: #32cd7524;
+  backdrop-filter: blur(10px);
+  border: 2px solid $verde-gradient;
+  opacity: 0;
+  transition: opacity 0.4s linear;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &.is-visible {
+    opacity: 1;
+  }
+  &::before {
+    content: "\276F";
+    transform: rotate(-90deg);
+    font-size: 2rem;
+    color: $verde-gradient;
+  }
+}
+.scroll__hidden {
+  display: none;
+}
+.scroll {
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 2rem 0;
+}
+
+/* 
+    Breakpoint 
+    */
+
+@media (min-width: 768px) {
+  .scroll__gotop {
+    left: 0;
+    right: 0;
+    bottom: 0.7rem;
+  }
+}

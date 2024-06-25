@@ -1,0 +1,44 @@
+@import "../utilities/variables";
+
+/* 
+    Bloque imagen - texto - CTA
+    */
+.about {
+  &__img {
+    width: 100%;
+    display: block;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    margin-bottom: 3em;
+    filter: $filter-shadow;
+  }
+  &__texts {
+    color: $color-main-fuente;
+  }
+  &__paragraph {
+    margin-top: 2em;
+  }
+  &__btn {
+    margin: 1rem 0;
+  }
+}
+
+/* 
+    Breakpoint
+     */
+
+@media (min-width: 768px) {
+  .about {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+    align-items: center;
+    &__order-right{
+      order:1
+    }
+    &__title {
+      font-size: 2rem;
+    }
+  }
+}

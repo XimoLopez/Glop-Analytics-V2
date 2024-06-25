@@ -1,0 +1,25 @@
+@import "../utilities/variables";
+/* 
+   Boton
+   */
+%btn {
+  display: inline-block;
+  width: 15rem;
+  padding: 1rem 0;
+  cursor: pointer;
+  &:hover {
+    box-shadow: $box-shadow-hover;
+    transform: scale(1.02);
+  }
+}
+@mixin btn($color-fuente: $color-bgdark-fuente, $color-fondo: $gradient) {
+  @extend %btn;
+  background-image: $color-fondo;
+  color: $color-fuente;
+  font-family: $heading-font;
+  font-weight: bold;
+  border-radius: 30px;
+  text-align: center;
+  box-shadow: $box-shadow;
+  transition: all 0.25s;
+}

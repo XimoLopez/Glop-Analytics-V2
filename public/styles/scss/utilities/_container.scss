@@ -1,0 +1,13 @@
+@import "../utilities/variables";
+
+/* 
+    Contenedor
+     */
+
+.container {
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: $padding-container;
+}

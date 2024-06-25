@@ -1,0 +1,10 @@
+.about {
+  &__img {
+    filter: $filter-shadow;
+    transition: all 0.25s;
+    &:hover {
+      transform: translateY(-15px);
+      filter: $filter-shadow-hover;
+    }
+  }
+}

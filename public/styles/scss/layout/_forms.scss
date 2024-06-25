@@ -1,0 +1,67 @@
+@import "../utilities/variables";
+
+/* Ancho del formulario */
+.form {
+  min-width:min-content;
+  max-width: 500px;
+  margin: 0 auto;
+  &__fieldset {
+    margin-bottom: 0.5rem;
+    border: 2px solid $verde-gradient;
+    border-radius: 10px;
+    padding: 1rem;
+  }
+  &__textarea {
+    width: 99.9%;
+    border: 2px solid $verde-gradient;
+    border-radius: 10px;
+    resize: vertical;
+    &[placeholder] {
+      padding: 1.5rem;
+    }
+    &:focus {
+      border: solid 2px $color-intro;
+      outline: 0 none;
+    }
+  }
+  &__label {
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  &__input {
+    display: block;
+    border: none;
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    padding: 1rem;
+    border: 2px solid $verde-gradient;
+    border-radius: 30px;
+    &:focus {
+      border: solid 2px $color-intro;
+      outline: 0 none;
+    }
+  }
+  &__required {
+    &:before {
+      content: "* ";
+      color: $verde-gradient;
+    }
+  }
+  &__condiciones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.8rem;
+    margin-bottom: 5px;
+    &--input {
+      flex: 1;
+    }
+    &--label {
+      flex: 3;
+    }
+  }
+  &__modal{
+    margin-top: 2rem;
+  }
+}

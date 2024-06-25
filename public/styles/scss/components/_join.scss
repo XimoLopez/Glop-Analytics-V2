@@ -1,0 +1,47 @@
+@import "../utilities/variables";
+/* 
+  Join
+   */
+.join {
+  background-image: linear-gradient($color-main 50%, $color-footer 50%);
+  padding: 60px 0;
+  &__container {
+    background-color: $bg-testimonials;
+    border-radius: 15px;
+    text-align: center;
+    color: $color-bgdark-fuente;
+    padding: 3rem 1.5em;
+  }
+  &__title {
+    margin-bottom: 1em;
+  }
+  &__paragraph {
+    line-height: 1.5;
+    margin-bottom: 1em;
+  }
+  &__form {
+    display: grid;
+    gap: 1.2em;
+  }
+  &__input {
+    padding: 1em 1.4em;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+  }
+}
+/* 
+    Brakepoint
+     */
+
+@media (min-width: 768px) {
+  .join {
+    &__container {
+      max-width: 800px;
+    }
+    &__form {
+      padding-top: 1em;
+      grid-template-columns: 1fr max-content;
+    }
+  }
+}

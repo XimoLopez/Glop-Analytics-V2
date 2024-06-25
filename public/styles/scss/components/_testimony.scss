@@ -1,0 +1,82 @@
+@import "../utilities/variables";
+/* 
+    testimony
+     */
+
+.testimony {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2em;
+  color: $color-bgdark-fuente;
+}
+
+.testimony__item {
+  width: 90%;
+  margin: 0 auto;
+  background-color: $bg-testimonials;
+  padding: 2em 1.2em;
+  border-radius: 6px;
+  position: relative;
+  transition: all 0.25s;
+  filter: $filter-shadow;
+}
+
+.testimony__item:first-of-type::after {
+  content: "";
+  position: absolute;
+  top: -1.2rem;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  z-index: -1;
+  background-image: url("../../img/bg-quotes.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: $filter-shadow;
+}
+
+.testimony__info {
+  margin-top: 1.5em;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.testimony__picture {
+  width: 40px;
+  height: 40px;
+}
+
+.testimony__img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.testimony__name {
+  font-size: 1.1rem;
+  font-family: $body-font;
+  margin-bottom: 0.4em;
+}
+
+.testimony__job {
+  font-size: 0.8rem;
+  color: #a1a1a1;
+}
+
+
+/* 
+ Brakepoint
+  */
+
+  @media (min-width: 768px) {
+  .testimony {
+    justify-content: space-between;
+    &__item {
+      width: 30%;
+    }
+  }
+
+}

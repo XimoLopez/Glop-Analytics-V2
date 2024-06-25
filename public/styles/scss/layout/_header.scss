@@ -1,0 +1,68 @@
+@import "../utilities/variables";
+
+/* 
+  Header 
+  */
+.header {
+  top:-2rem;
+  background-color: $color-intro;
+  position: relative;
+  color: $color-main-fuente;
+  &__ola {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 45%;
+    background-color: $color-main;
+    &::before {
+      content: "";
+      width: 100%;
+      height: 100px;
+      position: absolute;
+      top: -100px;
+      background-image: url("../../img/bg-curvy-mobile.svg");
+      background-repeat: no-repeat;
+      background-size: 100% 100px;
+    }
+  }
+  &__main {
+    text-align: center;
+    position: relative;
+    padding-top: 10rem;
+    max-width: 800px;
+  }
+  &__img {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    filter: $filter-shadow;
+    padding: 0 0.8rem;
+  }
+  &__title {
+    margin: 2rem 0;
+    filter: $filter-shadow;
+  }
+  &__paragraph {
+    line-height: 1.5;
+    margin-bottom: 2rem;
+  }
+}
+/* 
+  Brakepoint
+   */
+@media (min-width: 768px) {
+  .header {
+    &__ola {
+      &::before {
+        background-image: url("../../img/bg-curvy-desktop.svg");
+      }
+    }
+    &__title {
+      font-size: 3rem;
+    }
+    &__title--slogan {
+      font-size: 2rem;
+    }
+  }
+}
