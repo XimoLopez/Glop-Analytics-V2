@@ -8,7 +8,7 @@
         <a href="{{ url('/sobrega') }}" class="nav__link">+ Sobre GA</a>
     </div>
     <div class="nav__cta">
-        <a href="#" class="open__modal nav__link btn btn--cta" data-target="modalAccess">Acceder</a>
+        <a href="{{ url('/admin') }}" class="nav__link btn btn--cta">Acceder</a>
     </div>
     <!-- Icono menu burger -->
     <button id="burger" class="hamburger hamburger--spring" type="button" onclick="toggleMenu()">
