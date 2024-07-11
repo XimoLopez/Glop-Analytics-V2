@@ -1,5 +1,12 @@
 <x-app-layout>
 
+    <x-slot name="pageTitle">
+        Servicios de Glop Analytics | Todos tus datos en un único sitio
+    </x-slot>
+    <x-slot name="pageDescription">
+        Acceso desde cualquier dispositivos y lugar del mundo a tus datos para el control de tu negocio
+    </x-slot>
+
     <x-slot name="header">
 
         <figure class="about__picture">

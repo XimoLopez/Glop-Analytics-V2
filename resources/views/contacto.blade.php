@@ -1,5 +1,12 @@
 <x-app-layout>
 
+    <x-slot name="pageTitle">
+        Contacta con Glop | Todos tus datos en un único sitio
+    </x-slot>
+    <x-slot name="pageDescription">
+        Contacta con el equipo del departamento de ventas de Glop para adquirir Glop Analytics si ya dispones de Glop Business
+    </x-slot>
+
     <x-slot name="header">
 
         <figure>

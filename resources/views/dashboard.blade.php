@@ -2,57 +2,57 @@
 
 @section('title', 'Dashboard')
 
+@section('content_top_nav_left')
+    <h1>Dashboard</h1>
+@stop
+
 @section('content')
     <div class="row">
         <div class="col-sm">
-            <x-adminlte-small-box title="3156" text="Pedidos" icon="fas fa-shopping-basket" theme="blue" url="#"
-                url-text="Más info" />
+            <x-adminlte-small-box title="{{ $totalOrdersCurrentYear }}" text="Pedidos {{ $currentYear }}" icon="fas fa-shopping-basket" theme="blue" url="{{ url('/admin/pedidos') }}" url-text="Más info" />
         </div>
         <div class="col-sm">
-            <x-adminlte-small-box title="1639" text="Clientes" icon="fas fa-users" theme="maroon" url="#"
-                url-text="Más info" />
+            <x-adminlte-small-box title="{{ $totalClients }}" text="Clientes" icon="fas fa-users" theme="maroon" url="{{ url('/admin/clientes') }}" url-text="Más info" />
         </div>
         <div class="col-sm">
-            <x-adminlte-small-box title="84%" text="Recurrencias" icon="fas fa-redo" theme="indigo" url="#"
-                url-text="Más info" />
+            <x-adminlte-small-box title="84%" text="Recurrencias" icon="fas fa-redo" theme="indigo" url="#" url-text="Más info" class="bouncer" data-target="#recurrenciasCard"/>
         </div>
         <div class="col-sm">
-            <x-adminlte-small-box title="€ 72.759" text="Ganancias" icon="fas fa-coins" theme="success" url="#"
-                url-text="Más info" />
+            <x-adminlte-small-box title="€ {{ number_format($totalEarningsCurrentYear, 2) }}" text="Ganancias {{ $currentYear }}" icon="fas fa-coins" theme="success" url="#" url-text="Más info" class="bouncer" data-target="#gananciasCard"/>
         </div>
     </div>
     <div class="row">
         <div class="col-md-7">
-            <x-adminlte-card title="Pedidos por mes" icon="fas fa-shopping-basket">
+            <x-adminlte-card id="pedidosCard" title="Pedidos por mes" icon="fas fa-shopping-basket">
                 <canvas id="pedidosChart"></canvas>
             </x-adminlte-card>
-            <x-adminlte-card title="Ganancias por mes" icon="fas fa-coins">
+            <x-adminlte-card id="gananciasCard" title="Ganancias por mes" icon="fas fa-coins">
                 <canvas id="gananciasChart"></canvas>
             </x-adminlte-card>
         </div>
         <div class="col-md-5">
-            <x-adminlte-card title="Recurrencias" icon="fas fa-redo">
+            <x-adminlte-card id="recurrenciasCard" title="Recurrencias" icon="fas fa-redo">
                 <canvas id="recurrenciasChart"></canvas>
             </x-adminlte-card>
-            <x-adminlte-card title="Milestones Anuales" icon="fas fa-tasks">
+            <x-adminlte-card id="milestonesCard" title="Milestones Anuales" icon="fas fa-tasks">
                 <div class="milestone">
                     <div class="milestone-title">
                         <span>Pedidos</span>
-                        <span>3156 / 2150</span>
+                        <span>{{ $totalOrdersCurrentYear }} / 2150</span>
                     </div>
                     <x-adminlte-progress theme="blue" value=100 animated with-label />
                 </div>
                 <div class="milestone">
                     <div class="milestone-title">
                         <span>Clientes</span>
-                        <span>1639 / 1211</span>
+                        <span>{{ $totalClients }} / 1211</span>
                     </div>
                     <x-adminlte-progress theme="maroon" value=100 animated with-label />
                 </div>
                 <div class="milestone">
                     <div class="milestone-title">
                         <span>Ganancias</span>
-                        <span>72.759 € / 54.397 €</span>
+                        <span>€ {{ number_format($totalEarningsCurrentYear, 2) }} / 54.397 €</span>
                     </div>
                     <x-adminlte-progress theme="success" value=100 animated with-label />
                 </div>
@@ -62,29 +62,32 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/styles/css/admin.css">
+    @vite(['resources/css/admin.css', 'resources/js/admin.js'])
 @stop
 
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            var pedidosDataPreviousYear = @json(array_values($monthlyOrdersPreviousYear));
+            var pedidosDataCurrentYear = @json(array_values($monthlyOrdersCurrentYear));
+            var pedidosLabels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio']; // Adjust labels as needed
 
             var pedidosChartcontainer = document.getElementById('pedidosChart').getContext('2d');
             var pedidosChart = new Chart(pedidosChartcontainer, {
                 type: 'bar',
                 data: {
-                    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+                    labels: pedidosLabels,
                     datasets: [{
-                            label: ['2023'],
-                            data: [353, 311, 345, 389, 354, 398],
+                            label: '{{ $previousYear }}',
+                            data: pedidosDataPreviousYear,
                             backgroundColor: [
                                 '#bad2f3'
                             ],
                         },
                         {
-                            label: ['2024'],
-                            data: [437, 539, 475, 505, 591, 609],
+                            label: '{{ $currentYear }}',
+                            data: pedidosDataCurrentYear,
                             backgroundColor: [
                                 '#3E86E3'
                             ],
@@ -108,14 +111,17 @@
                 },
             });
 
+            var gananciasDataPreviousYear = @json(array_values($monthlyEarningsPreviousYear));
+            var gananciasDataCurrentYear = @json(array_values($monthlyEarningsCurrentYear));
+
             var gananciasChartcontainer = document.getElementById('gananciasChart').getContext('2d');
             var gananciasChart = new Chart(gananciasChartcontainer, {
                 type: 'line',
                 data: {
-                    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+                    labels: pedidosLabels,
                     datasets: [{
-                            label: ['2023'],
-                            data: [7653, 9822, 8341, 8562, 9563, 10456],
+                            label: '{{ $previousYear }}',
+                            data: gananciasDataPreviousYear,
                             backgroundColor: '#9Ad3b1',
                             borderColor: '#9Ad3b1',
                             pointBackgroundColor: '#9Ad3b1',
@@ -124,8 +130,8 @@
                             pointRadius: 4,
                         },
                         {
-                            label: ['2024'],
-                            data: [10305, 12852, 11246, 11474, 13450, 13432],
+                            label: '{{ $currentYear }}',
+                            data: gananciasDataCurrentYear,
                             backgroundColor: '#2BBA68',
                             borderColor: '#2BBA68',
                             pointBackgroundColor: '#2BBA68',
@@ -164,14 +170,13 @@
                             '#d095ff',
                             '#a065e3',
                         ],
-                    }, ]
+                    }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                 },
             });
-
         });
     </script>
 @stop

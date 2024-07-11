@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PedidosController;
+use App\Http\Controllers\ClientesController;
+
 
 
 Route::get('/', function () {
@@ -25,13 +29,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/admin', function () {
-        return view('dashboard');
-    })->name('dashboard');
-    Route::get('/admin/pedidos', function () {
-        return view('pedidos');
-    })->name('pedidos');
-    Route::get('/admin/clientes', function () {
-        return view('clientes');
-    })->name('clientes');
+    Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/admin/pedidos', [PedidosController::class, 'index'])->name('clientes');
+    Route::get('/admin/clientes', [ClientesController::class, 'index'])->name('pedidos');
 });

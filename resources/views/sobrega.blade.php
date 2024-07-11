@@ -1,5 +1,12 @@
 <x-app-layout>
 
+    <x-slot name="pageTitle">
+        Sobre Glop Analytics | Todo lo que necesitas saber de Glop Analytics y sus ventajas
+    </x-slot>
+    <x-slot name="pageDescription">
+        Puedes descubrir todos las ventajas que te ofrece el servicio de Glop Analytics y como puede ayudarte
+    </x-slot>
+
     <x-slot name="header">
 
       <!-- Ilustración en SVG añadida desde la etiqueta img -->

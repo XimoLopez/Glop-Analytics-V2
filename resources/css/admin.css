@@ -1,0 +1,223 @@
+/* General */
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&family=Raleway:wght@400;700&display=swap");
+
+:root {
+    --admin-color-primary: #2BBA68;
+    --admin-color-secondary: #202A3C;
+}
+
+.bg-success {
+    background-color: var(--admin-color-primary) !important;
+}
+
+.bg-blue {
+    background-color: #3e86e3 !important;
+}
+
+.bg-maroon {
+    background-color: #b02f4e !important;
+}
+
+.bg-indigo {
+    background-color: #a065e3 !important;
+}
+
+body {
+    background: #F5F7F9;
+    font-family: 'Open Sans';
+}
+
+.preloader {
+    background: var(--admin-color-primary);
+}
+
+
+/* Sidebar */
+
+.main-sidebar {
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+    padding: 0px;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.main-sidebar > a,
+.main-sidebar .sidebar {
+    width: 100%;
+    padding-top: 14px;
+    padding-bottom: 0px;
+    transition: .2s;
+}
+
+body:not(.sidebar-collapse) .main-sidebar > a,
+body:not(.sidebar-collapse) .main-sidebar .sidebar {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.main-sidebar > a {
+    padding-top: 30px;
+    border-bottom: none !important;
+    overflow: hidden;
+}
+
+body.sidebar-collapse .main-sidebar:not(:hover) > a {
+    width: 64px !important;
+    padding-left: 4px;
+}
+
+.main-sidebar > a img {
+    max-height: 58px !important;
+}
+
+.main-sidebar .sidebar:before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 50px;
+    background: url('/img/mas-de-glop-analytics.svg');
+    background-position: center bottom !important;
+    background-repeat: no-repeat;
+    background-size: 400px;
+
+}
+
+.main-sidebar .nav-link {
+    border-radius: 20px;
+    width: auto !important;
+    font-weight: 600;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.main-sidebar .nav-link:not(.active):hover {
+    color: var(--admin-color-primary);
+}
+
+.main-sidebar .nav-link.active {
+    background: var(--admin-color-primary);
+    box-shadow: none;
+}
+
+.main-sidebar .nav-link i {
+    width: 28px;
+    text-align: center;
+}
+
+
+/* Content */
+
+.main-header,
+.content-wrapper {
+    background: #F5F7F9;
+}
+
+.main-header h1 {
+    font-size: 22px;
+    line-height: 38px;
+    margin: 0;
+    font-weight: 500;
+}
+
+.content-wrapper {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+@media screen and (min-width: 780px) {
+    .main-header{
+        padding: 20px 30px;
+    }
+    .content-wrapper {
+        padding: 26px 30px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .main-header {
+        background: #ffffff !important;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+        border: none;
+    }
+}
+
+.content-wrapper .card,
+.content-wrapper .small-box {
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.content-wrapper .card .card-header {
+    padding-top: 20px;
+    padding-bottom: 0;
+    border: none;
+}
+
+.content-wrapper .card .card-header h3 {
+    font-weight: 600 !important;
+}
+
+.content-wrapper .card:not(.bg-success) .card-header * {
+    color: #6c757d;
+}
+
+.content-wrapper .card #pedidosChart,
+.content-wrapper .card #gananciasChart {
+    height: 240px !important;
+}
+
+.content-wrapper .card .milestone {
+    padding: 0 0 16px 0;
+}
+
+.content-wrapper .card .milestone-title {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 4px;
+    font-weight: 500;
+}
+
+
+.bounce {
+    z-index: 10;
+    position: relative;
+    animation-name: jello-horizontal-soft;
+    animation-duration: 1.5s;
+}
+@keyframes jello-horizontal-soft {
+    0% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+    30% {
+        -webkit-transform: scale3d(1.125, 0.875, 1);
+        transform: scale3d(1.125, 0.875, 1);
+    }
+    40% {
+        -webkit-transform: scale3d(0.875, 1.125, 1);
+        transform: scale3d(0.875, 1.125, 1);
+    }
+    50% {
+        -webkit-transform: scale3d(1.075, 0.925, 1);
+        transform: scale3d(1.075, 0.925, 1);
+    }
+    65% {
+        -webkit-transform: scale3d(0.975, 1.025, 1);
+        transform: scale3d(0.975, 1.025, 1);
+    }
+    75% {
+        -webkit-transform: scale3d(1.025, 0.975, 1);
+        transform: scale3d(1.025, 0.975, 1);
+    }
+    100% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+}

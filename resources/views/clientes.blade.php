@@ -2,11 +2,13 @@
 
 @section('title', 'Clientes')
 
+@section('content_top_nav_left')
+    <h1>Clientes</h1>
+@stop
 
 @section('content')
 
     @php
-
         $heads = [
             ['label' => 'ID'],
             ['label' => 'Nombre'],
@@ -17,46 +19,20 @@
             ['label' => 'Actions', 'no-export' => true, 'width' => 5],
         ];
 
-        $btnEdit = '<button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
-            <i class="fa fa-lg fa-fw fa-pen"></i>
-        </button>';
-        $btnDelete = '<button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
-            <i class="fa fa-lg fa-fw fa-trash"></i>
-        </button>';
-        $btnDetails = '<button class="btn btn-xs btn-default text-teal mx-1 shadow" title="Details">
-            <i class="fa fa-lg fa-fw fa-eye"></i>
-        </button>';
-
         $config = [
-            'data' => [
-                [
-                    32,
-                    'John Bender',
-                    'johnbendeer@gmail.com',
-                    '12/03/23',
-                    '17',
-                    '322 €',
-                    '<nobr>' . $btnEdit . $btnDelete . $btnDetails . '</nobr>',
-                ],
-                [
-                    114,
-                    'Sophia Clemens',
-                    'sophiaclemens@gmail.com',
-                    '05/08/23',
-                    '13',
-                    '245 €',
-                    '<nobr>' . $btnEdit . $btnDelete . $btnDetails . '</nobr>',
-                ],
-                [
-                    282,
-                    'Peter Sousa',
-                    'petersousa@gmail.com',
-                    '17/02/24',
-                    '6',
-                    '107 €',
-                    '<nobr>' . $btnEdit . $btnDelete . $btnDetails . '</nobr>',
-                ],
-            ],
+            'data' => $clients->map(function ($client) {
+                return [
+                    $client->id,
+                    $client->name,
+                    $client->email,
+                    $client->created_at->format('d/m/y'),
+                    $client->orders_count,
+                    $client->total_spent . ' €', // Use 'total_spent' attribute from Client model
+                    '<nobr>' . '<button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit"><i class="fa fa-lg fa-fw fa-pen"></i></button>' .
+                    '<button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete"><i class="fa fa-lg fa-fw fa-trash"></i></button>' .
+                    '<button class="btn btn-xs btn-default text-teal mx-1 shadow" title="Details"><i class="fa fa-lg fa-fw fa-eye"></i></button>' . '</nobr>',
+                ];
+            }),
             'columns' => [
                 ['type' => 'num'],
                 null,
@@ -69,7 +45,6 @@
             'order' => [[0, 'desc']],
             'language' => ['url' => '//cdn.datatables.net/plug-ins/2.0.8/i18n/es-ES.json'],
         ];
-
     @endphp
 
     {{-- Minimal example / fill data using the component slot --}}
@@ -84,13 +59,12 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/styles/css/admin.css">
+    @vite(['resources/css/admin.css'])
 @stop
 
 @section('js')
 
 @stop
-
 
 @section('plugins.Datatables', true)
 @section('plugins.DatatablesPlugins', true)

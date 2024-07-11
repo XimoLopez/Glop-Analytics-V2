@@ -1,0 +1,23 @@
+/*
+  VARIABLES
+  */
+/* Colores */
+$color-intro: #baf3d1;
+$color-main-fuente: #181f2a;
+$color-bgdark-fuente: #ffffff;
+$color-main: #ffffff;
+$color-footer: #0b1523;
+$bg-testimonials: #202a3c;
+$color-main-gradient: #2cba69;
+$verde-gradient: #32cd75;
+$bg-glassmorphism: #ffffff1a;
+$bg-modal-access: #ffffffc7;
+/* Padding y sobras */
+$padding-container: 2rem 0;
+$box-shadow: 3px 3px 10px #00000057;
+$box-shadow-hover: 3px 3px 10px #00000099;
+$box-shadow-modal:rgba(163, 163, 163, 0.37) 3px 3px 14px -1px;
+$filter-shadow: drop-shadow(3px 3px 5px #00000057);
+$filter-shadow-hover: drop-shadow(10px 10px 5px #00000057);
+/* Gradientes */
+$gradient: linear-gradient(to right, $color-main-gradient, $verde-gradient);

@@ -9,9 +9,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Meta Tags -->
-    <title>Glop Analytics | Todos tus datos en un único sitio</title>
-    <meta name="title" content="Glop Analytics | Todos tus datos en un único sitio">
-    <meta name="description" content="Controla la analítica de tsu establecimientos desde un solo sitio. Cuadro de mandos - usuarios - informes personalizados - Envíos directo a la asesoría. ">
+    <title>{{ $pageTitle }}</title>
+    <meta name="title" content="{{ $pageTitle }}">
+    <meta name="description" content="{{ $pageDescription }}">
 
     <!-- Favicons para distintos dispositivos -->
     <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon-glop-32x32.png">
@@ -23,7 +23,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/scss/styles.scss', 'resources/js/main.js'])
 
     <!-- Styles -->
     @livewireStyles
@@ -31,22 +31,18 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://metatags.io/">
-    <meta property="og:title" content="Glop Analytics | Todos tus datos en un único sitio">
-    <meta property="og:description" content="Controla la analítica de tsu establecimientos desde un solo sitio. Cuadro de mandos - usuarios - informes personalizados - Envíos directo a gestaría. ">
+    <meta property="og:title" content="{{ $pageTitle }}">
+    <meta property="og:description" content="{{ $pageDescription }}">
     <meta property="og:image" content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://metatags.io/">
-    <meta property="twitter:title" content="Glop Analytics | Todos tus datos en un único sitio">
-    <meta property="twitter:description" content="Controla la analítica de tus establecimientos desde un solo sitio. Cuadro de mandos - usuarios - informes personalizados - Envíos directo a gestoria. ">
+    <meta property="twitter:title" content="{{ $pageTitle }}">
+    <meta property="twitter:description" content="{{ $pageDescription }}">
     <meta property="twitter:image" content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png">
 
-    <!-- Añadimos la hoja de estilos -->
-    <link rel="stylesheet" href="styles/css/styles.css">
-
-    <!-- Añadimos JavaScript -->
-    <script defer src="js/main.js"></script>
+    
 
     <!-- Añadimos el manifest para que la web funcione con la tecnología PWA -->
     <link rel="manifest" href="manifest.json">
@@ -127,38 +123,6 @@
         </section>
 
     </footer>
-
-    <section class="modal">
-        <div id="modalAccess" class="modal__window">
-
-            <form class="form form__modal" action="/procesamiento-datos" method="post">
-                <!-- Agrupación de datos personales obligatorios -->
-                <fieldset class="form__fieldset">
-                    <!-- Título del bloque de datos personales -->
-
-                    <legend class="form__legend">Acceso Back-office</legend>
-                    <p>Introduzca su usuario y contraseña de acceso</p>
-                    <br>
-                    <!--  class="form__input" y label para el usuario -->
-                    <label class="form__label" for="usuario">Usuario</label>
-                    <!-- Controlamos que no se puedan enviar un máximo de 30 caracteres -->
-                    <input class="form__input" type="text" name="usuario-form" id="usuario" placeholder="" pattern="{1,30}" required autofocus />
-                    <!-- Input de la contraseña -->
-                    <label class="form__label" for="password">Contraseña</label>
-                    <!-- Controlamos que no se puedan enviar un máximo de 30 caracteres -->
-                    <input class="form__input" type="password" name="password-form" id="password" placeholder="" pattern="{1,30}" required />
-                </fieldset>
-                <!-- Botón de envío -->
-                <input class="form__input btn btn--submit btn--submit--modal" type="submit" value="Acceder">
-                <a class="modal__btn-close modal__hide"></a>
-
-            </form>
-
-        </div>
-        <!-- Bloque de fondo de la pantalla modal - por defecto oculto -->
-        <div class="modal__fader"></div>
-    </section>
-
     <!-- Botón GoToTop con scroll -->
     <button id="goTop" class="scroll__gotop"></button>
     <!-- Cálculo del alto de la pantalla  para el scroll to top-->
