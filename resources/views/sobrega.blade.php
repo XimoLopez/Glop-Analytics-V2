@@ -20,10 +20,6 @@
       <a href="#" class="btn btn--jello">Contratar servicio</a>
 
     </x-slot>
-
-
-    <div id="darkbg" class="dark-bg" onclick="toggleMenu()"></div>
-
     <section class="about container">
       <figure class="about__picture">
         <img src="img/about-services.svg" class="about__img"

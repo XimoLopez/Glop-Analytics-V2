@@ -1,15 +1,39 @@
+// Importación de jQuery 
 import jQuery from "jquery";
 window.$ = jQuery;
 /* 
   Script menú hamburger 
   */
 //Funciona con la librería de https://jonsuh.com/hamburgers/ donde podemos descargar el CSS para ser usado
-//Añadir a la etiqueta button y al fondo el evento onclick="toggleMenu()
 const toggleMenu = () => {
-    document.getElementById("menu-mob").classList.toggle("menu-open"); //Añadir un id y una clase "menu-mob" a la etiqueta de la lista de enlaces
-    document.getElementById("burger").classList.toggle("is-active"); //Añadir el id "burger" al boton del menu hamburger de la librería de jonsuh
-    document.getElementById("darkbg").classList.toggle("visible"); //Añadir esto <div id="darkbg" class="darkbg"></div> después del main
+    const menu = document.getElementById("menu-mob");
+    const burger = document.getElementById("burger");
+    const darkBg = document.getElementById("darkbg");
+
+    if (menu && burger && darkBg) {
+        menu.classList.toggle("menu-open");
+        burger.classList.toggle("is-active");
+        darkBg.classList.toggle("visible");
+    } else {
+        console.error("No se encontraron uno o más elementos necesarios para el menú hamburguesa.");
+    }
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+    const burgerButton = document.getElementById("burger");
+    const darkBg = document.getElementById("darkbg");
+
+    if (burgerButton) {
+        burgerButton.addEventListener("click", toggleMenu);
+    }
+
+    if (darkBg) {
+        darkBg.addEventListener("click", toggleMenu);
+        darkBg.addEventListener("keypress", toggleMenu);
+        darkBg.addEventListener("keydown", toggleMenu);
+        darkBg.addEventListener("keyup", toggleMenu);
+    }
+});
 
 /* 
   script Scroll GoToTop 

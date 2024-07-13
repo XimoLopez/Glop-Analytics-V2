@@ -1,3 +1,5 @@
+/* resources/scss/layout/_menu.scss */
+
 @import "../utilities/variables";
 
 /*
@@ -30,8 +32,6 @@
     justify-content: flex-end;
   }
 }
-
-
 
 /*
   MENU BURGER IVAN
@@ -80,6 +80,11 @@
   transition: all 1s;
 }
 
+/* Añadir padding-bottom a los enlaces del menú hamburguesa cuando está abierto */
+.menu-mob.menu-open .nav__link {
+  padding-bottom: 5%;
+}
+
 /* .menu-mob li {
   margin: 50px 0;
 }
@@ -120,7 +125,7 @@
   border: 0;
   margin: 0;
   overflow: visible;
-  z-index:950;
+  z-index: 950;
 }
 .hamburger:hover {
   opacity: 0.7;

@@ -712,9 +712,6 @@
 
     </x-slot>
 
-
-    <div id="darkbg" class="dark-bg" onclick="toggleMenu()"></div>
-
     <section class="cards container">
 
         <article class="cards__item">

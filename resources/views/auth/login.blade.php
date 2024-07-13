@@ -41,6 +41,7 @@
                 <x-button>
                     {{ __('Log in') }}
                 </x-button>
+                {{--se añade el botón de registro del componente creado en components/buttonlink.blade.php --}}
                 <x-buttonlink type="button" href="/register">
                     {{ __('Register') }}
                 </x-buttonlink>

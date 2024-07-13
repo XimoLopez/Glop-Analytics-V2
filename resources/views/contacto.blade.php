@@ -12,19 +12,17 @@
         <figure>
             <img src="img/icon-costes-GA.svg" class="header__img" alt="contacta con glop para recibir información" />
         </figure>
-        <hgroup>
+        <div class="header-group">
             <h1 class="header__title"> Contacto <br><span class="header__title--slogan">Completa el formulario</span></h1>
             <h2 class="header__paragraph">
                 Contacta con nuestro equipo del departamento de ventas para recibir más información de Glop Analytics y los
                 beneficios
                 que puede aportar a tu negocio.
+        </div>
             </h2>
         </hgroup>
 
     </x-slot>
-
-
-    <div id="darkbg" class="dark-bg" onclick="toggleMenu()"></div>
 
     <section class="container">
         <!-- Formulario de inscripción con el método POST para mayor seguridad -->

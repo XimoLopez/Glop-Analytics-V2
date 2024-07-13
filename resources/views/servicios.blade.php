@@ -23,9 +23,6 @@
 
     </x-slot>
 
-
-    <div id="darkbg" class="dark-bg" onclick="toggleMenu()"></div>
-
     <section class="about container">
         <figure class="about__picture">
             <img src="img/icon-dashboard-GA.svg" class="about__img about__img--hover" alt="ilustración de un resumen del servicio Glop Analytics">

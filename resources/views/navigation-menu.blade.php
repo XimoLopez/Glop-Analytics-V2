@@ -17,3 +17,5 @@
         </span>
     </button>
 </nav>
+  <!-- Fondo oscuro para el menú hamburguesa -->
+<button id="darkbg" class="dark-bg" onclick="toggleMenu()"></button>
