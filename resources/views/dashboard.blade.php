@@ -12,10 +12,10 @@
             <x-adminlte-small-box title="{{ $totalOrdersCurrentYear }}" text="Pedidos {{ $currentYear }}" icon="fas fa-shopping-basket" theme="blue" url="{{ url('/admin/pedidos') }}" url-text="Más info" />
         </div>
         <div class="col-sm">
-            <x-adminlte-small-box title="{{ $totalClients }}" text="Clientes" icon="fas fa-users" theme="maroon" url="{{ url('/admin/clientes') }}" url-text="Más info" />
+            <x-adminlte-small-box title="{{ $totalClients }}" text="Clientes" icon="fas fa-users" theme="maroon" url="{{ url('/admin/clientes') }}" url-text="Más info" class="bouncer" data-target="#clientesCard"/>
         </div>
         <div class="col-sm">
-            <x-adminlte-small-box title="84%" text="Recurrencias" icon="fas fa-redo" theme="indigo" url="#" url-text="Más info" class="bouncer" data-target="#recurrenciasCard"/>
+            <x-adminlte-small-box title="84%" text="Recurrencias" icon="fas fa-redo" theme="info" url="#" url-text="Más info" class="bouncer" data-target="#recurrenciasCard"/>
         </div>
         <div class="col-sm">
             <x-adminlte-small-box title="€ {{ number_format($totalEarningsCurrentYear, 2) }}" text="Ganancias {{ $currentYear }}" icon="fas fa-coins" theme="success" url="#" url-text="Más info" class="bouncer" data-target="#gananciasCard"/>
@@ -47,7 +47,7 @@
                         <span>Clientes</span>
                         <span>{{ $totalClients }} / 1211</span>
                     </div>
-                    <x-adminlte-progress theme="maroon" value=100 animated with-label />
+                    <x-adminlte-progress theme="orange" value=100 animated with-label />
                 </div>
                 <div class="milestone">
                     <div class="milestone-title">
@@ -69,12 +69,12 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var pedidosDataPreviousYear = @json(array_values($monthlyOrdersPreviousYear));
-            var pedidosDataCurrentYear = @json(array_values($monthlyOrdersCurrentYear));
-            var pedidosLabels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio']; // Adjust labels as needed
+            let pedidosDataPreviousYear = @json(array_values($monthlyOrdersPreviousYear));
+            let pedidosDataCurrentYear = @json(array_values($monthlyOrdersCurrentYear));
+            let pedidosLabels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio']; // Adjust labels as needed
 
-            var pedidosChartcontainer = document.getElementById('pedidosChart').getContext('2d');
-            var pedidosChart = new Chart(pedidosChartcontainer, {
+            let pedidosChartcontainer = document.getElementById('pedidosChart').getContext('2d');
+            let pedidosChart = new Chart(pedidosChartcontainer, {
                 type: 'bar',
                 data: {
                     labels: pedidosLabels,
@@ -111,11 +111,11 @@
                 },
             });
 
-            var gananciasDataPreviousYear = @json(array_values($monthlyEarningsPreviousYear));
-            var gananciasDataCurrentYear = @json(array_values($monthlyEarningsCurrentYear));
+            let gananciasDataPreviousYear = @json(array_values($monthlyEarningsPreviousYear));
+            let gananciasDataCurrentYear = @json(array_values($monthlyEarningsCurrentYear));
 
-            var gananciasChartcontainer = document.getElementById('gananciasChart').getContext('2d');
-            var gananciasChart = new Chart(gananciasChartcontainer, {
+            let gananciasChartcontainer = document.getElementById('gananciasChart').getContext('2d');
+            let gananciasChart = new Chart(gananciasChartcontainer, {
                 type: 'line',
                 data: {
                     labels: pedidosLabels,
@@ -158,17 +158,17 @@
                 },
             });
 
-            var recurrenciasChartContainer = document.getElementById('recurrenciasChart').getContext('2d');
-            var recurrenciasChart = new Chart(recurrenciasChartContainer, {
+            let recurrenciasChartContainer = document.getElementById('recurrenciasChart').getContext('2d');
+            let recurrenciasChart = new Chart(recurrenciasChartContainer, {
                 type: 'pie',
                 data: {
                     labels: ['Un pedido', 'Dos pedidos', 'tres o más pedidos'],
                     datasets: [{
                         data: [642, 527, 312],
                         backgroundColor: [
-                            '#dcb8fb',
-                            '#d095ff',
-                            '#a065e3',
+                            '#7ac6ce',
+                            '#47abb9',
+                            '#1490a4',
                         ],
                     }]
                 },

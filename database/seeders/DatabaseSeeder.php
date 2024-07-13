@@ -3,25 +3,25 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
+    // Establece la clase de seeder que se ejecutará al iniciar la aplicación
     public function run(): void
     {
-        // User::factory(10)->create();
-
+        // Crea un usuario demo
         User::factory()->create([
             'name' => 'Demo',
             'email' => 'demo@glop.es',
-            'password' => Hash::make('demo'), // Set the password here
+            'password' => Hash::make('demo'), // Establece la contraseña aquí
         ]);
+        
+        // Llama al seeder de la tabla de clientes
         $this->call(ClientsTableSeeder::class);
+        
+        // Llama al seeder de la tabla de órdenes
         $this->call(OrdersTableSeeder::class);
     }
 }

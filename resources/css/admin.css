@@ -3,8 +3,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&family=Raleway:wght@400;700&display=swap");
 
 :root {
-    --admin-color-primary: #2BBA68;
-    --admin-color-secondary: #202A3C;
+    --admin-color-primary: #2bba68;
+    --admin-color-secondary: #202a3c;
+    --admin-color-success: #baf3d1;
 }
 
 .bg-success {
@@ -16,7 +17,7 @@
 }
 
 .bg-maroon {
-    background-color: #b02f4e !important;
+    background-color: #fe7e10 !important;
 }
 
 .bg-indigo {
@@ -24,14 +25,13 @@
 }
 
 body {
-    background: #F5F7F9;
-    font-family: 'Open Sans';
+    background: #f5f7f9;
+    font-family: "Open Sans";
 }
 
 .preloader {
-    background: var(--admin-color-primary);
+    background: var(--admin-color-success);
 }
-
 
 /* Sidebar */
 
@@ -47,7 +47,7 @@ body {
     width: 100%;
     padding-top: 14px;
     padding-bottom: 0px;
-    transition: .2s;
+    transition: 0.2s;
 }
 
 body:not(.sidebar-collapse) .main-sidebar > a,
@@ -72,18 +72,17 @@ body.sidebar-collapse .main-sidebar:not(:hover) > a {
 }
 
 .main-sidebar .sidebar:before {
-    content: '';
+    content: "";
     position: absolute;
     z-index: -1;
     left: 0;
     right: 0;
     top: 0;
     bottom: 50px;
-    background: url('/img/mas-de-glop-analytics.svg');
+    background: url("/img/mas-de-glop-analytics.svg");
     background-position: center bottom !important;
     background-repeat: no-repeat;
     background-size: 400px;
-
 }
 
 .main-sidebar .nav-link {
@@ -110,12 +109,11 @@ body.sidebar-collapse .main-sidebar:not(:hover) > a {
     text-align: center;
 }
 
-
 /* Content */
 
 .main-header,
 .content-wrapper {
-    background: #F5F7F9;
+    background: #f5f7f9;
 }
 
 .main-header h1 {
@@ -131,7 +129,7 @@ body.sidebar-collapse .main-sidebar:not(:hover) > a {
 }
 
 @media screen and (min-width: 780px) {
-    .main-header{
+    .main-header {
         padding: 20px 30px;
     }
     .content-wrapper {
@@ -183,7 +181,6 @@ body.sidebar-collapse .main-sidebar:not(:hover) > a {
     padding-bottom: 4px;
     font-weight: 500;
 }
-
 
 .bounce {
     z-index: 10;

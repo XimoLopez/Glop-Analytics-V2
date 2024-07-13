@@ -13,27 +13,26 @@ class OrdersTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-
-        // Get the ID of the user with email 'demo@glop.es'
+        // Obtener la ID del usuario con el correo 'demo@glop.es'
         $user = User::where('email', 'demo@glop.es')->first();
 
-        // Get all client IDs
+        // Obtener todas las IDs de clientes
         $clientIds = Client::pluck('id')->toArray();
 
-        // Generate 3156 orders for 2024
+        // Generar 7822 pedidos para 2024
         for ($i = 0; $i < 7822; $i++) {
             $order = [
-                'client_id' => $faker->randomElement($clientIds),
-                'date' => $faker->dateTimeBetween('2023-01-01', '2024-07-14'),
-                'items' => $faker->numberBetween(1, 10),
+                'client_id' => $faker->randomElement($clientIds), 
+                'date' => $faker->dateTimeBetween('2023-01-01', '2024-07-14'), 
+                'items' => $faker->numberBetween(1, 10), 
                 'value' => $faker->randomFloat(2, 10, 300),
                 'status' => $faker->randomElement(['procesando', 'entregado', 'cancelado', 'reembolsado']),
-                'user_id' => $user->id,
-                'created_at' => now(),
+                'user_id' => $user->id, 
+                'created_at' => now(), 
                 'updated_at' => now(),
             ];
 
-            DB::table('orders')->insert($order);
+            DB::table('orders')->insert($order); // Insertar el pedido en la tabla 'orders'
         }
     }
 }
