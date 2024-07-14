@@ -9,15 +9,14 @@
 @section('content')
 
     @php
-        // Configuración de la tabla de clientes
         $heads = [
             ['label' => 'ID'],
             ['label' => 'Nombre'],
             ['label' => 'Email'],
             ['label' => 'Registro'],
-            ['label' => 'Pedidos'],
+            ['label' => 'Pedidos OK'],
             ['label' => 'Gastos'],
-            ['label' => 'Acciones', 'no-export' => true, 'width' => 5],
+            ['label' => 'Actions', 'no-export' => true, 'width' => 5],
         ];
 
         $config = [
@@ -26,12 +25,12 @@
                     $client->id,
                     $client->name,
                     $client->email,
-                    $client->created_at->format('d/m/y'),
+                    $client->registration->format('d/m/y'),
                     $client->orders_count,
-                    $client->total_spent . ' €', // Uso del atributo 'total_spent' del modelo Client
-                    '<span style="white-space: nowrap;">' . '<button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit"><i class="fa fa-lg fa-fw fa-pen"></i></button>' .
+                    $client->total_spent . ' €',
+                    '<nobr>' . '<button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit"><i class="fa fa-lg fa-fw fa-pen"></i></button>' .
                     '<button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete"><i class="fa fa-lg fa-fw fa-trash"></i></button>' .
-                    '<button class="btn btn-xs btn-default text-teal mx-1 shadow" title="Details"><i class="fa fa-lg fa-fw fa-eye"></i></button>' . '</span>',
+                    '<button class="btn btn-xs btn-default text-teal mx-1 shadow" title="Details"><i class="fa fa-lg fa-fw fa-eye"></i></button>' . '</nobr>',
                 ];
             }),
             'columns' => [
@@ -48,19 +47,13 @@
         ];
     @endphp
 
-    {{-- Ejemplo minimalista / llenar datos usando el slot del componente --}}
+    {{-- Minimal example / fill data using the component slot --}}
     <div class="row">
         <div class="col-md-12">
-            @if($clients->isEmpty())
-                <x-adminlte-alert theme="warning" title="Advertencia">
-                    No se encontraron clientes.
-                </x-adminlte-alert>
-            @else
-                <x-adminlte-card title="Listado de clientes" icon="fas fa-users">
-                    <x-adminlte-datatable id="table-clientes" :heads="$heads" :config="$config" theme="light" striped hoverable
-                        with-buttons />
-                </x-adminlte-card>
-            @endif
+            <x-adminlte-card title="Listado de clientes" icon="fas fa-users">
+                <x-adminlte-datatable id="table-clientes" :heads="$heads" :config="$config" theme="light" striped hoverable
+                    with-buttons />
+            </x-adminlte-card>
         </div>
     </div>
 @stop
@@ -70,6 +63,7 @@
 @stop
 
 @section('js')
+
 @stop
 
 @section('plugins.Datatables', true)

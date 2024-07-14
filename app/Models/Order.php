@@ -9,7 +9,6 @@ class Order extends Model
 {
     use HasFactory;
 
-    // Propiedades que se pueden asignar masivamente
     protected $fillable = [
         'client_id',
         'date',
@@ -19,20 +18,16 @@ class Order extends Model
         'user_id',
     ];
 
-    // Convertir la propiedad 'date' a una instancia de Carbon (manejo de fechas)
-    protected $casts = [
-        'date' => 'datetime',
+    protected $dates = [
+        'date',
     ];
 
-    // Relación con el modelo Client
+    protected $casts = [
+        'date' => 'datetime'
+    ];
+
     public function client()
     {
         return $this->belongsTo(Client::class);
-    }
-
-    // Relación con el modelo User
-    public function user()
-    {
-        return $this->belongsTo(User::class);
     }
 }

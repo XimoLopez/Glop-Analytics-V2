@@ -167,9 +167,16 @@ body.sidebar-collapse .main-sidebar:not(:hover) > a {
 }
 
 .content-wrapper .card #pedidosChart,
-.content-wrapper .card #gananciasChart {
-    height: 240px !important;
+.content-wrapper .card #gananciasChart,
+.content-wrapper .card #recurrenciasChart {
+    height: auto !important;
+    aspect-ratio: 3 !important;
+    min-height: 220px;
 }
+.content-wrapper .card #recurrenciasChart {
+    aspect-ratio: 1.4 !important;
+}
+
 
 .content-wrapper .card .milestone {
     padding: 0 0 16px 0;

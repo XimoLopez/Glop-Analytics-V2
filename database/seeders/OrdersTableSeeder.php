@@ -13,26 +13,45 @@ class OrdersTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        // Obtener la ID del usuario con el correo 'demo@glop.es'
         $user = User::where('email', 'demo@glop.es')->first();
 
-        // Obtener todas las IDs de clientes
         $clientIds = Client::pluck('id')->toArray();
 
-        // Generar 7822 pedidos para 2024
-        for ($i = 0; $i < 7822; $i++) {
-            $order = [
-                'client_id' => $faker->randomElement($clientIds), 
-                'date' => $faker->dateTimeBetween('2023-01-01', '2024-07-14'), 
-                'items' => $faker->numberBetween(1, 10), 
+        $orders = [];
+
+        $createOrder = function ($clientId) use ($faker, $user) {
+            return [
+                'client_id' => $clientId,
+                'date' => $faker->dateTimeBetween('2023-01-01', '2024-07-14'),
+                'items' => $faker->numberBetween(1, 10),
                 'value' => $faker->randomFloat(2, 10, 300),
-                'status' => $faker->randomElement(['procesando', 'entregado', 'cancelado', 'reembolsado']),
-                'user_id' => $user->id, 
-                'created_at' => now(), 
+                'status' => $faker->randomElement(
+                    array_merge(
+                        array_fill(0, 85, 'entregado'),
+                        array_fill(0, 5, 'procesando'),
+                        array_fill(0, 5, 'cancelado'),
+                        array_fill(0, 5, 'reembolsado')
+                    )
+                ),
+                'user_id' => $user->id,
+                'created_at' => now(),
                 'updated_at' => now(),
             ];
+        };
 
-            DB::table('orders')->insert($order); // Insertar el pedido en la tabla 'orders'
+        foreach ($clientIds as $clientId) {
+            $orders[] = $createOrder($clientId);
         }
+
+        $totalOrdersToGenerate = 7822 - count($clientIds);
+        for ($i = 0; $i < $totalOrdersToGenerate; $i++) {
+            $orders[] = $createOrder($faker->randomElement($clientIds));
+        }
+
+        usort($orders, function($a, $b) {
+            return $a['date']->getTimestamp() - $b['date']->getTimestamp();
+        });
+
+        DB::table('orders')->insert($orders);
     }
 }

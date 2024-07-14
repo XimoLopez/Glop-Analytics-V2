@@ -12,7 +12,8 @@ class CreateClientsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->date('registration'); // Changed to date type
+            $table->dateTime('registration');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -22,3 +23,4 @@ class CreateClientsTable extends Migration
         Schema::dropIfExists('clients');
     }
 }
+

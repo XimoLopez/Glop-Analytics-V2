@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PedidosController extends Controller
 {
-    // Método para listar todos los pedidos
     public function index()
     {
-        $orders = Order::all(); // Obtener todos los pedidos de la base de datos
+        $user = Auth::user();
+        $orders = Order::where('user_id', $user->id)->with('client')->get();
 
         return view('pedidos', compact('orders'));
     }

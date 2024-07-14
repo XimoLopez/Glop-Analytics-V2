@@ -14,7 +14,6 @@ export default defineConfig({
                 // Se añaden los archivos CSS y JS de la aplicación Glop Analytics
                 "styles.css": "resources/scss/styles.scss",
                 "main.js": "resources/js/main.js",
-               
             },
             refresh: true,
         }),

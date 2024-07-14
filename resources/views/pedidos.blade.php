@@ -9,7 +9,6 @@
 @section('content')
 
     @php
-        // Definición de los encabezados de la tabla
         $heads = [
             ['label' => '#'],
             ['label' => 'Cliente'],
@@ -20,34 +19,30 @@
             ['label' => 'Actions', 'no-export' => true, 'width' => 5],
         ];
 
-        // Configuración de la datatable
         $config = [
             'data' => $orders->map(function ($order) {
                 return [
                     $order->id,
-                    $order->client->name,
-                    $order->date,
+                    $order->client_id . ' - ' . $order->client->name,
+                    $order->date->format('d/m/y'),
                     $order->items,
                     $order->value . ' €',
                     $order->status,
-                    '<span style="white-space: nowrap;">' . 
-                    '<button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit"><i class="fa fa-lg fa-fw fa-pen"></i></button>' .
+                    '<nobr>' . '<button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit"><i class="fa fa-lg fa-fw fa-pen"></i></button>' .
                     '<button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete"><i class="fa fa-lg fa-fw fa-trash"></i></button>' .
-                    '<button class="btn btn-xs btn-default text-teal mx-1 shadow" title="Details"><i class="fa fa-lg fa-fw fa-eye"></i></button>' . 
-                    '</span>',
+                    '<button class="btn btn-xs btn-default text-teal mx-1 shadow" title="Details"><i class="fa fa-lg fa-fw fa-eye"></i></button>' . '</nobr>',
                 ];
             }),
             'columns' => [
-                ['type' => 'num'],  
-                ['type' => 'text'],               
-                ['type' => 'date'],    
                 ['type' => 'num'],
-                ['type' => 'num'],     
+                null,
+                ['type' => 'date'],
+                ['type' => 'num'],
+                ['type' => 'num'],
                 ['orderable' => false],
                 ['orderable' => false],
             ],
-            'order' => [[0, 'desc']], // Ordenar por la primera columna en orden descendente
-            // Configuración de idioma
+            'order' => [[0, 'desc']],
             'language' => ['url' => '//cdn.datatables.net/plug-ins/2.0.8/i18n/es-ES.json'],
         ];
     @endphp

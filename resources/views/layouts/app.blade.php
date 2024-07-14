@@ -55,8 +55,10 @@
         <section class="header__main container">
             {{ $header }}
         </section>
+    <!-- Fondo oscuro para el menú hamburguesa -->
+    <button id="darkbg" class="dark-bg" onclick="toggleMenu()"></button>
     </header>
-
+ 
     <main class="main">
 
         {{ $slot }}

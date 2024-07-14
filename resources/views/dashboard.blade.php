@@ -9,24 +9,24 @@
 @section('content')
     <div class="row">
         <div class="col-sm">
-            <x-adminlte-small-box title="{{ $totalOrdersCurrentYear }}" text="Pedidos {{ $currentYear }}" icon="fas fa-shopping-basket" theme="blue" url="{{ url('/admin/pedidos') }}" url-text="Más info" />
+            <x-adminlte-small-box title="{{ $totalOrders }}" text="Pedidos" icon="fas fa-shopping-basket" theme="blue" url="{{ url('/admin/pedidos') }}" url-text="Más info" />
         </div>
         <div class="col-sm">
-            <x-adminlte-small-box title="{{ $totalClients }}" text="Clientes" icon="fas fa-users" theme="maroon" url="{{ url('/admin/clientes') }}" url-text="Más info" class="bouncer" data-target="#clientesCard"/>
+            <x-adminlte-small-box title="{{ $totalClients }}" text="Clientes" icon="fas fa-users" theme="maroon" url="{{ url('/admin/clientes') }}" url-text="Más info" />
         </div>
         <div class="col-sm">
-            <x-adminlte-small-box title="84%" text="Recurrencias" icon="fas fa-redo" theme="info" url="#" url-text="Más info" class="bouncer" data-target="#recurrenciasCard"/>
+            <x-adminlte-small-box title="{{ number_format($clientsRecurrenciesReal, 2) }} %" text="Recurrencias (2+)" icon="fas fa-redo" theme="indigo" url="#" url-text="Más info" class="bouncer" data-target="#recurrenciasCard"/>
         </div>
         <div class="col-sm">
-            <x-adminlte-small-box title="€ {{ number_format($totalEarningsCurrentYear, 2) }}" text="Ganancias {{ $currentYear }}" icon="fas fa-coins" theme="success" url="#" url-text="Más info" class="bouncer" data-target="#gananciasCard"/>
+            <x-adminlte-small-box title="{{ number_format($totalEarnings) }} €" text="Ganancias" icon="fas fa-coins" theme="success" url="#" url-text="Más info" class="bouncer" data-target="#gananciasCard"/>
         </div>
     </div>
     <div class="row">
         <div class="col-md-7">
-            <x-adminlte-card id="pedidosCard" title="Pedidos por mes" icon="fas fa-shopping-basket">
+            <x-adminlte-card id="pedidosCard" title="Pedidos mensuales" icon="fas fa-shopping-basket">
                 <canvas id="pedidosChart"></canvas>
             </x-adminlte-card>
-            <x-adminlte-card id="gananciasCard" title="Ganancias por mes" icon="fas fa-coins">
+            <x-adminlte-card id="gananciasCard" title="Ganancias mensuales" icon="fas fa-coins">
                 <canvas id="gananciasChart"></canvas>
             </x-adminlte-card>
         </div>
@@ -34,27 +34,27 @@
             <x-adminlte-card id="recurrenciasCard" title="Recurrencias" icon="fas fa-redo">
                 <canvas id="recurrenciasChart"></canvas>
             </x-adminlte-card>
-            <x-adminlte-card id="milestonesCard" title="Milestones Anuales" icon="fas fa-tasks">
+            <x-adminlte-card id="milestonesCard" title="Milestones % ({{ $currentYear }} / {{ $previousYear }})" icon="fas fa-tasks">
                 <div class="milestone">
                     <div class="milestone-title">
                         <span>Pedidos</span>
-                        <span>{{ $totalOrdersCurrentYear }} / 2150</span>
+                        <span>{{ $totalOrdersCurrentYear }} / {{ $totalOrdersPreviousYear }}</span>
                     </div>
-                    <x-adminlte-progress theme="blue" value=100 animated with-label />
+                    <x-adminlte-progress theme="blue" value="{{ number_format($totalOrdersMilestoneCompletion, 2) }}" animated with-label />
                 </div>
                 <div class="milestone">
                     <div class="milestone-title">
                         <span>Clientes</span>
-                        <span>{{ $totalClients }} / 1211</span>
+                        <span>{{ $totalClientsCurrentYear }} / {{ $totalClientsPreviousYear }}</span>
                     </div>
-                    <x-adminlte-progress theme="orange" value=100 animated with-label />
+                    <x-adminlte-progress theme="maroon" value="{{ number_format($totalClientsMilestoneCompletion) }}" animated with-label />
                 </div>
                 <div class="milestone">
                     <div class="milestone-title">
                         <span>Ganancias</span>
-                        <span>€ {{ number_format($totalEarningsCurrentYear, 2) }} / 54.397 €</span>
+                        <span>{{ number_format($totalEarningsCurrentYear) }} € / {{ number_format($totalEarningsPreviousYear) }} € </span>
                     </div>
-                    <x-adminlte-progress theme="success" value=100 animated with-label />
+                    <x-adminlte-progress theme="success" value="{{ number_format($totalEarningsMilestoneCompletion, 2) }}" animated with-label />
                 </div>
             </x-adminlte-card>
         </div>
@@ -69,29 +69,26 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            let pedidosDataPreviousYear = @json(array_values($monthlyOrdersPreviousYear));
-            let pedidosDataCurrentYear = @json(array_values($monthlyOrdersCurrentYear));
-            let pedidosLabels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio']; // Adjust labels as needed
+            var mesesLabels = ['ENE', 'FEB', 'MAR', 'ABR', 'MAY', 'JUN', 'JUL', 'AGO', 'SEP', 'OCT', 'NOV', 'DIC'];
 
-            let pedidosChartcontainer = document.getElementById('pedidosChart').getContext('2d');
-            let pedidosChart = new Chart(pedidosChartcontainer, {
+            // Pedidos Chart
+            var pedidosChartContainer = document.getElementById('pedidosChart').getContext('2d');
+            var pedidosChart = new Chart(pedidosChartContainer, {
                 type: 'bar',
                 data: {
-                    labels: pedidosLabels,
-                    datasets: [{
-                            label: '{{ $previousYear }}',
-                            data: pedidosDataPreviousYear,
-                            backgroundColor: [
-                                '#bad2f3'
-                            ],
-                        },
+                    labels: mesesLabels,
+                    datasets: [
+                        @foreach($monthlyData as $year => $yearData)
                         {
-                            label: '{{ $currentYear }}',
-                            data: pedidosDataCurrentYear,
-                            backgroundColor: [
-                                '#3E86E3'
+                            label: '{{ $year }}',
+                            data: [
+                                @foreach($yearData as $monthData)
+                                    {{ $monthData['totalOrders'] }},
+                                @endforeach
                             ],
+                            backgroundColor: '{{ $year % 2 == 0 ? "#3E86E3" : "#bad2f3" }}'
                         },
+                        @endforeach
                     ]
                 },
                 options: {
@@ -111,34 +108,30 @@
                 },
             });
 
-            let gananciasDataPreviousYear = @json(array_values($monthlyEarningsPreviousYear));
-            let gananciasDataCurrentYear = @json(array_values($monthlyEarningsCurrentYear));
-
-            let gananciasChartcontainer = document.getElementById('gananciasChart').getContext('2d');
-            let gananciasChart = new Chart(gananciasChartcontainer, {
+            // Ganancias Chart
+            var gananciasChartContainer = document.getElementById('gananciasChart').getContext('2d');
+            var gananciasChart = new Chart(gananciasChartContainer, {
                 type: 'line',
                 data: {
-                    labels: pedidosLabels,
-                    datasets: [{
-                            label: '{{ $previousYear }}',
-                            data: gananciasDataPreviousYear,
-                            backgroundColor: '#9Ad3b1',
-                            borderColor: '#9Ad3b1',
-                            pointBackgroundColor: '#9Ad3b1',
-                            tension: 0.3,
-                            borderWidth: 2,
-                            pointRadius: 4,
-                        },
+                    labels: mesesLabels,
+                    datasets: [
+                        @foreach($monthlyData as $year => $yearData)
                         {
-                            label: '{{ $currentYear }}',
-                            data: gananciasDataCurrentYear,
-                            backgroundColor: '#2BBA68',
-                            borderColor: '#2BBA68',
-                            pointBackgroundColor: '#2BBA68',
+                            label: '{{ $year }}',
+                            data: [
+                                @foreach($yearData as $monthData)
+                                    {{ $monthData['totalEarnings'] }},
+                                @endforeach
+                            ],
+                            backgroundColor: '{{ $year % 2 == 0 ? "#2BBA68" : "#9Ad3b1" }}',
+                            borderColor: '{{ $year % 2 == 0 ? "#2BBA68" : "#9Ad3b1" }}',
+                            pointBackgroundColor: '{{ $year % 2 == 0 ? "#2BBA68" : "#9Ad3b1" }}',
                             tension: 0.3,
                             borderWidth: 2,
                             pointRadius: 4,
+                            order: '{{ -$year }}',
                         },
+                        @endforeach
                     ]
                 },
                 options: {
@@ -158,14 +151,21 @@
                 },
             });
 
-            let recurrenciasChartContainer = document.getElementById('recurrenciasChart').getContext('2d');
-            let recurrenciasChart = new Chart(recurrenciasChartContainer, {
+            // Recurrencias Chart (Static Example)
+            var recurrenciasChartContainer = document.getElementById('recurrenciasChart').getContext('2d');
+            var recurrenciasChart = new Chart(recurrenciasChartContainer, {
                 type: 'pie',
                 data: {
-                    labels: ['Un pedido', 'Dos pedidos', 'tres o más pedidos'],
+                    labels: ['Sin pedidos', 'Un pedido', 'Dos pedidos', 'tres o más pedidos'],
                     datasets: [{
-                        data: [642, 527, 312],
+                        data: [
+                            {{ $clientsRecurrenciesNone }},
+                            {{ $clientsRecurrencies['once'] }},
+                            {{ $clientsRecurrencies['twice'] }},
+                            {{ $clientsRecurrencies['thriceOrMore'] }},
+                        ],
                         backgroundColor: [
+                            '#9ac6ce',
                             '#7ac6ce',
                             '#47abb9',
                             '#1490a4',
